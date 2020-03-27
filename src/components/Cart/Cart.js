@@ -1,6 +1,8 @@
 import React from "react";
 import "./Cart.css";
 
+import Product from "../Product/Product";
+
 const Cart = props => {
   const cart = props.cart;
 
@@ -12,7 +14,7 @@ const Cart = props => {
   }*/
   //to use array of items have to use reduce to access one by one
   const items = cart.reduce((items, pd) => pd.price, 0);
-  const total = cart.reduce((total, pd) => total + pd.price, 0);
+  const total = cart.reduce((total, pd) => total + pd.price * pd.quantity, 0);
   /* let total = 0;
   for (let i = 0; i < cart.length; i++) {
     const product = cart[i];
@@ -27,8 +29,10 @@ const Cart = props => {
       <p>Items Ordered: {cart.length}</p>
       <p>Items: ${items}</p>
       <p>Shipping & Handling: ${shipping}</p>
-      <p>Estimated Tax: {tax}</p>
+      <p>Estimated Tax: ${tax}</p>
       <p>Order Total: $ {grandTotal}</p>
+      <br />
+      {props.children}
     </div>
   );
 };
